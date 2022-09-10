@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:weathery/presentation/Manger/weather_manger/AppCubit.dart';
 import 'package:weathery/presentation/Manger/app_manger/cubit_cubit.dart';
 import 'package:weathery/presentation/screens/home_screen/home_screen.dart';
@@ -14,9 +15,23 @@ import 'presentation/Manger/app_manger/bloc_observer.dart';
 import 'presentation/Manger/app_manger/cubit_state.dart';
 
 void main() async {
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(statusBarColor: Colors.transparent));
   WidgetsFlutterBinding.ensureInitialized();
   await CacheHelper.init();
+  LocationPermission permission;
+  permission= await Geolocator.requestPermission();
+  if(permission==LocationPermission.denied){
+    permission=await Geolocator.requestPermission();
+    if(permission==LocationPermission.deniedForever){
+      return Future.error('Location Not Available');
+    }
+  }
+  if(!await Geolocator.isLocationServiceEnabled()){
+    throw LocationServiceDisabledException();
+  }
+
   bool? isDark = CacheHelper.readData(key: 'isDark');
+
   BlocOverrides.runZoned(
     () {
       runApp(MyApp(isDark: isDark));

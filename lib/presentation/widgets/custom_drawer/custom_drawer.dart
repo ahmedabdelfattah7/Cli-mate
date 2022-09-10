@@ -9,7 +9,7 @@ import 'package:weathery/presentation/screens/city_screen/city_screen.dart';
 import 'package:weathery/presentation/Manger/app_manger/cubit_cubit.dart';
 import 'package:weathery/presentation/widgets/Custom_form_field/text_form_field.dart';
 import 'package:weathery/presentation/widgets/divider/divider.dart';
-
+import 'package:day_night_switcher/day_night_switcher.dart';
 class CustomDrawer extends StatelessWidget {
   const CustomDrawer({
     Key? key,
@@ -41,7 +41,7 @@ class CustomDrawer extends StatelessWidget {
               ),
               MyDivider(),
               Padding(
-                padding: const EdgeInsets.only(top: 50),
+                padding: const EdgeInsets.only(top: 20),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
@@ -76,7 +76,7 @@ class CustomDrawer extends StatelessWidget {
                              style:  TextStyle(
                                color: color,
                                fontFamily: 'Ubuntu',
-                               fontSize: 25,
+                               fontSize: 20,
                              ),
                            ),
                            const SizedBox(
@@ -100,6 +100,10 @@ class CustomDrawer extends StatelessWidget {
                      ],
                    ),
                  ),
+                    MyDivider(),
+                    const SizedBox(
+                      height: 20,
+                    ),
                     MyFormField(
                         Controller: searchController,
                         textInputType: TextInputType.text,
@@ -131,7 +135,7 @@ class CustomDrawer extends StatelessWidget {
                     ),
                     CustomButton(
                       color: color,
-                      labelName: 'Discover Other Cites ',
+                      labelName: 'Discover ',
                       icon: Icon(
                         FontAwesomeIcons.earthAfrica,
                         size: 25,
@@ -160,8 +164,9 @@ class CustomDrawer extends StatelessWidget {
                         size: 25,
                         color: color,
                       ),
-                      labelName: 'Dark Mode',
+                      labelName: 'Mode',
                     ),
+
                   ],
                 ),
               ),
